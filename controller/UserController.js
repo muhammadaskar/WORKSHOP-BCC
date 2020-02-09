@@ -97,13 +97,14 @@ const deleteUserById = (req, res, next) => {
             })
         }).catch(() => {
             res.status(404)
-            const error = new Error("User Not Found")
-            next(error)
+            res.json({
+                "status": false,
+                "message": "User not found"
+            })
         })
 }
 
 const loginUser = async (req, res, next) => {
-    console.log(res)
     const email = req.body.email
     const [rows] = await db.query('SELECT * FROM users WHERE email = ?', [email])
     if (rows.length != 0) {
@@ -119,6 +120,7 @@ const loginUser = async (req, res, next) => {
                 if (token) {
                     res.json({
                         "success": true,
+                        "messsage": "Login Successfully",
                         "token": token
                     })
                 } else {

@@ -8,7 +8,7 @@ router.get('/', likeController.getAllLike)
 // POST /  like a post 
 router.post('/', likeController.postLike)
 
-// DELETE / dislike a post
-router.delete('/')
+// DELETE / dislike a post by id
+router.delete('/:id_post', likeController.deleteLike)
 
 module.exports = router

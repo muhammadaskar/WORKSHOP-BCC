@@ -1,7 +1,9 @@
 const db = require('../database')
 
+
+// GET SEMUA POST
 const getAllPost = async (req, res, next) => {
-    const [rows] = await db.query('SELECT * FROM posts')
+    const [rows] = await db.query('SELECT id, id_user, content FROM posts')
     if (rows.length != 0) {
         res.json({
             "success": true,
@@ -15,9 +17,11 @@ const getAllPost = async (req, res, next) => {
     }
 }
 
+
+// GET POST BY ID
 const getUserById = async (req, res, next) => {
     const id_post = req.params.id
-    const [rows] = await db.query('SELECT * FROM posts WHERE id = ?', [id_post])
+    const [rows] = await db.query('SELECT id, id_user, content FROM posts WHERE id = ?', [id_post])
     if (rows.length != 0) {
         res.json({
             "success": true,
@@ -33,31 +37,23 @@ const getUserById = async (req, res, next) => {
     }
 }
 
-// TODO : tambahkan logika id user
+// 
 const postUser = async (req, res, next) => {
     const id_User = req.body.id_user
     const content = req.body.content
-    const [rows] = await db.query('SELECT * FROM users WHERE id = ?', [id_User])
-    if (rows.length == id_User) {
-        db.query('INSERT INTO posts(id_user, content) values(?, ?)', [id_User, content])
-            .then(() => {
-                res.json({
-                    "success": true,
-                    "message": "upload succes"
-                })
-            }).catch((err) => {
-                res.json({
-                    "success": false,
-                    "error": err
-                })
-                next(err)
+    db.query('INSERT INTO posts(id_user, content) values(?, ?)', [id_User, content])
+        .then(() => {
+            res.json({
+                "success": true,
+                "message": "upload succes"
             })
-    } else {
-        res.json({
-            "success": false,
-            "message": "Failed"
+        }).catch((err) => {
+            res.json({
+                "success": false,
+                "error": err
+            })
+            next(err)
         })
-    }
 }
 
 const updatePost = (req, res, next) => {
