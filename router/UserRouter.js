@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const userController = require('../controller/UserController')
 
-const user = ["user1", "user2", "user3"]
 
 // router.get('/', (req, res) => {
 //     if (user.length > 0) {
@@ -54,6 +53,9 @@ const user = ["user1", "user2", "user3"]
 //     user.slice(id, 1)
 // })
 
+/* ---------
+    USER
+----------*/
 // GET SEMUA USER
 router.get('/', userController.getAllUser)
 
