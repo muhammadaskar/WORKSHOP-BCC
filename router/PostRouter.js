@@ -1,21 +1,24 @@
-// const router = require('express').Router()
-// const postController = require('../controller/PostController')
+const router = require('express').Router()
+const postController = require('../controller/PostController')
 
-// /* ---------
-//     POST
-// ----------*/
+/* ---------
+    POST
+----------*/
 
-// // GET BY ID
-// router.get('/:id', postController.getUserById)
+// GET ALL
+router.get('/', postController.getAllPost)
 
-// // POST BY ID
-// router.post('/', postController.postUser)
+// GET BY ID
+router.get('/:id', postController.getUserById)
 
-// // EDIT BY ID
-// router.put('/:id')
+// POST BY ID
+router.post('/', postController.postUser)
 
-// // HAPUS BY ID
-// router.delete(':/id')
+// EDIT BY ID
+router.put('/:id', postController.updatePost)
+
+// HAPUS BY ID
+router.delete('/:id', postController.deletePost)
 
 
-// module.exports = router
+module.exports = router
